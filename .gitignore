@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Compiled / debug files
+*.exe
+*.out
+*.o
+a.out
+*.dSYM/
+
+# Temporary files
+*.log
