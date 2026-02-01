@@ -30,12 +30,38 @@ int main() {
             int end = upper_bound(a.begin(), a.end(), r) - a.begin();
 
             long long cnt = end - st;
-            if (l == a[i] && a[i] == r) cnt--;
+            if (l <= a[i] && a[i] <= r) cnt--;
 
             ans += cnt;
         }
 
         cout << ans / 2 << "\n";
+    
+
+        // sort(a.begin(), a.end());
+
+        // auto calcLessThanX = [&](long long X) {
+        //     int j = 0;
+        //     long long ans = 0;
+
+        //     for (int i = n - 1; i >= 0; i--) {
+        //         while (j < n && s - a[i] - a[j] >= X) {
+        //             j++;
+        //         }
+        //         ans += (n - j);
+        //     }
+
+
+        //     for (int i = 0; i < n; i++) {
+        //         if (s - a[i] - a[i] < X) {
+        //             ans--;
+        //         }
+        //     }
+
+        //     return ans / 2;
+        // };
+
+        // cout << calcLessThanX(y + 1) - calcLessThanX(x) << "\n";
     }
 
     return 0;
