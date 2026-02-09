@@ -12,7 +12,7 @@ int main() {
         cin >> s;
         int n = s.size();
 
-        // Find first zero
+       
         int z = -1;
         for (int i = 0; i < n; i++) {
             if (s[i] == '0') {
@@ -21,7 +21,7 @@ int main() {
             }
         }
 
-        // If no zero, any single bit works
+
         if (z == -1) {
             cout << 1 << " " << n << " 1 1\n";
             continue;
@@ -31,7 +31,6 @@ int main() {
         string best = "";
         int best_l = 0;
 
-        // Try all l < z where s[l] == '1'
         for (int l = 0; l < z; l++) {
             if (s[l] != '1') continue;
 
@@ -46,7 +45,6 @@ int main() {
             }
         }
 
-        // Output
         cout << 1 << " " << n << " "
              << best_l + 1 << " " << best_l + len << "\n";
     }
