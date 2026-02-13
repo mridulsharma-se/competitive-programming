@@ -1,26 +1,9 @@
-#include <bits/stdc++.h>
-using namespace std;
 
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+        for(int i=0;i<n;i++){
+            if(a[i][m-1]!=b[i][m-1]) ok=false;
+        }
 
-    int t;
-    cin>>t;
-
-    while(t--){
-        int n,x,y;
-        cin>>n>>x>>y;
-
-        vector<int>a(n,-1);
-
-       
-        for(int i=0;i<y;i++) a[i]=1;
-
-      
-        for(int i=x-1;i<n;i++) a[i]=1;
-
-        for(int v:a) cout<<v<<" ";
-        cout<<"\n";
+        if(ok) cout<<"YES\n";
+        else cout<<"NO\n";
     }
 }
