@@ -32,62 +32,47 @@ template <typename T, typename... V>
 void _print(T t, V... v) { cerr << t; if (sizeof...(v)) cerr << ", "; _print(v...); }
 
 ll expo(ll a, ll b, ll mod = MOD) {
-    ll res = 1; 
-    a %= mod;
-    while (b > 0) {
-        if (b & 1) res = (res * a) % mod;
-        a = (a * a) % mod;
-        b >>= 1;
-    }
+    ll res = 1; a %= mod;
+    while (b > 0) { if (b & 1) res = (res * a) % mod; a = (a * a) % mod; b >>= 1; }
     return res;
 }
-
-ll mminvprime(ll a, ll b = MOD) { 
-    return expo(a, b - 2, b); 
-}
+ll mminvprime(ll a, ll b = MOD) { return expo(a, b - 2, b); }
 
 struct Mint {
     ll val;
     Mint(ll _val = 0) : val((_val % MOD + MOD) % MOD) {}
     Mint operator+(const Mint& o) const { return Mint(val + o.val); }
     Mint operator-(const Mint& o) const { return Mint(val - o.val + MOD); }
-    Mint operator*(const Mint& o) const { return Mint((val * o.val) % MOD); }
+    Mint operator*(const Mint& o) const { return Mint(val * o.val); }
     Mint operator/(const Mint& o) const { return *this * Mint(mminvprime(o.val)); }
-
     Mint& operator+=(const Mint& o) { return *this = *this + o; }
     Mint& operator-=(const Mint& o) { return *this = *this - o; }
     Mint& operator*=(const Mint& o) { return *this = *this * o; }
     Mint& operator/=(const Mint& o) { return *this = *this / o; }
-
     bool operator==(const Mint& o) const { return val == o.val; }
-
-    friend ostream& operator<<(ostream& os, const Mint& m) { 
-        return os << m.val; 
-    }
+    friend ostream& operator<<(ostream& os, const Mint& m) { return os << m.val; }
 };
 
 void solve() {
-
     int n;
-    string s;
-
     cin >> n;
-    cin >> s;
 
-    s = "1" + s + "1";
+    vector<int> a(n);
+    for(int i = 0; i < n; i++) cin >> a[i];
 
-    int ans = 0;
+    vector<int> b = a;
+    sort(all(b));
 
-    for(int i = 1, l = 0; i <= n; i++){
-        if(s[i] == '0'){
-            if(s[i-1] == '1') l = i;
-            if(s[i+1] == '1'){
-                int c = (l == 1) + (i == n);
-                ans += (i - l + 1 + c) / 3;
-            }
-        }
-        else{
-            ans++;
+    if(a == b){
+        cout << -1 << "\n";
+        return;
+    }
+
+    int ans = INT_MAX;
+
+    for(int i = 0; i < n; i++){
+        if(a[i] != b[i]){
+            ans = min(ans, max(a[i] - b[0], b[n-1] - a[i]));
         }
     }
 
@@ -95,15 +80,11 @@ void solve() {
 }
 
 int main() {
-
     fastio();
-
-    int t;
+    int t = 1;
     cin >> t;
-
-    while(t--) {
+    while (t--) {
         solve();
     }
-
     return 0;
 }
